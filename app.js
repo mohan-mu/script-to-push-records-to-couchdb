@@ -23,14 +23,13 @@ const couchAuth = new NodeCouchDb({
         pass: 'password'
     }
 });
-
-// http://jan:password@51.15.36.29:5984/patients
+//code to list databases
 couchExternal.listDatabases().then(function (dbs) {
 	// console.log(dbs);
 	// body...
 });
 
-const dbName = "patients";
+const dbName = "patients";// enter db name here 
 const startKey = ["Ann"];
 const endKey = ["George"];
 const viewUrl = "_design/list/_view/by_firstname";
@@ -39,12 +38,13 @@ const queryOptions = {
     startKey,
     endKey
 };
+// localstorage to keep track 
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
   localStorage = new LocalStorage('./scratch');
 }
 
-//use the local storage
+
 var count = localStorage.getItem("ais") || 1;
 
 
@@ -54,6 +54,7 @@ var count = localStorage.getItem("ais") || 1;
         localStorage.setItem("ais", count);
     }
 
+//loop to push 500 records
 for (i=0 ; i<500;i++){
 var ms=['married','unmarried','divorced','widowed'];
 var reli=['hindu','muslim','christian','sikh','buddhist','other/missing'];
@@ -98,61 +99,8 @@ patientname: Math.random().toString(36).slice(9),
 
 
 
-// 1-5  : Math.floor(Math.random() * 6) + 0
-// address:Math.random().toString(36).slice(9) ,
-// age:Math.floor((Math.random() * (15 - 40) + 40)),
-// ageatmarriage:Math.floor((Math.random() * (15 - 40) + 40)),
-// ancregno:"Gasdfood",
-// ancvisits:"3",
-// ashacontactnumber:Math.floor(1000000000 + Math.random() * 9000000000),
-// ashaname:Math.random().toString(36).slice(9),
-// bloodgroup:"a-",
-// contactnumber:count,
-// edd:Math.random().toString(36).slice(9),
-// education:"Illiterate",
-// height:(Math.random() * (4.5 - 6.2) + 6.2).toFixed(1),
-// heightunit:"foot",
-// ifa:"yes",
-// ifatablets:Math.random().toString(36).slice(9),
-// lmp:Math.random().toString(36).slice(9),
-// paritynumber:Math.floor(10 + Math.random() * 90),
-// patientname:Math.random().toString(36).slice(9),
-// phcname:Math.random().toString(36).slice(9),
-// placeofdelivery:"both",
-// socialgroup:"general",
-// sourceifa:"government",
-// symptoms:{fastheartbeat:true,
-// 	   fits:true,
-// 	   lossofconsciousness:true,
-// 	     severeheadache:true
-// 	 },
-// 	 thayicardno:Math.floor(1000 + Math.random() * 9999),
-// 	 usg:"yes",
-// 	 weight:Math.floor((Math.random() * (45 - 70) + 70))
-//        };
-
-
 inc();
-// couchExternal.insert("patients",patient ).then(function (response) { console.log(response)}); 
 
-// couch.insert("databaseName", {
-//     _id: "document_id",
-//     field: ["sample", "data", true]
-// }).then(({data, headers, status}) => {
-//     // data is json response 
-//     // headers is an object with all response headers 
-//     // status is statusCode number 
-// }, err => {
-//     // either request error occured 
-//     // ...or err.code=EDOCCONFLICT if document with the same id already exists 
-// });
-
-// for (var i =0; i >= 10; i++) {
-
-// console.log(i);
-// name();
-// }
-// function name(){
 couchExternal.insert("patients",patient).then((data) => {
 	console.log("done")
 	console.log(data);
@@ -168,76 +116,7 @@ couchExternal.insert("patients",patient).then((data) => {
 });
 }
 
-// }
 
-
-
-// };
-
-
-
-//  err => {
-// 	console.log(err);
-//     // either request error occured 
-//     // ...or err.code=EDOCCONFLICT if document with the same id already exists 
-// });
-          // thayicardno:$scope.thayicardno,
-                 // ancregno:$scope.ancregno,
-                 // patientname:$scope.patientname,
-                 // address:$scope.address,
-                 // contactnumber:$scope.contactnumber,
-                 // phcname:$scope.phcname,
-                 // ashaname:$scope.ashaname,
-                 // ashacontactnumber:$scope.ashacontactnumber,
-                 // age:$scope.age,
-                 // paritynumber:$scope.paritynumber,
-                 // bloodgroup:$scope.bloodgroup,
-                 // ageatmarriage:$scope.ageatmarriage,
-                 // lmp:$scope.lmp,
-                 // edd:$scope.edd,
-                 // socialgroup:$scope.socialgroup,
-                 // education:$scope.education,
-                 // educationtxt:$scope.educationtxt,
-                 // weight:$scope.weight,
-                 // height:$scope.height,
-                 // heightunit:$scope.heightunit,
-                 // ancvisits:$scope.ancvisits,
-                 // placeofdelivery:$scope.placeofdelivery,
-                 // usg:$scope.usg,
-                 // usgtxt:$scope.usgtxt,
-                 // ifa:$scope.ifa,
-                 // sourceifa:$scope.sourceifa,
-                 // ifatablets:$scope.ifatablets,
-                 // discountinuedtxt:$scope.discountinuedtxt,
-                 // symptoms:$scope.symptoms
-                 
-
-
- // insert(dbName, data) {
- //        return this._requestWrapped({
- //            method: 'POST',
- //            url: `${this._baseUrl}/${dbName}`,
- //            body: data
- //        }).then(({res, body}) => {
- //            this._checkDocumentManipulationStatus(res.statusCode, body)
-
- //            if (res.statusCode !== 201 && res.statusCode !== 202) {
- //                throw new RequestError('EUNKNOWN', `Unexpected status code while inserting document into the database: ${res.statusCode}`, body);
- //            }
-
- //            return {
- //                data: body,
- //                headers: res.headers,
- //                status: res.statusCode
- //            };
- //        });
- //    }
-
-
-
-
-
- 
 // couchExternal.get(dbName, viewUrl, queryOptions).then((data) => {
 // 	console.log(data);
 //     // data is json response 
