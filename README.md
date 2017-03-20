@@ -1,2 +1,6 @@
 # script-to-push-records-to-couchdb
-script to push records to couch db 
+  ## To run 
+  * npm install
+  * node app.js
+  
+  
