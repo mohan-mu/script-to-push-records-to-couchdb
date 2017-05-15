@@ -12,6 +12,7 @@
     "felix-couchdb": "^1.0.8",
     "node-couch": "^1.0.6",
     "node-couchdb": "^1.1.1",
-    "node-localstorage":"*"
+    "node-localstorage":"*",
+    "node-couchdb-plugin-memcached":"*"
   }
 }
